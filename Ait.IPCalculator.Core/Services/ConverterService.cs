@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ait.IPCalculator.Core.Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,17 @@ namespace Ait.IPCalculator.Core.Services
                 binary += ConvertBitArrayToString(ConvertByteToBitArray(byteValue));
             }
             return binary;
+        }
+        public string ConvertBinaryToDottedDecimal(string input)
+        {
+            List<byte> bytes = new List<byte>();
+            for (int i = 0; i < (input.Length / 8); ++i)
+            {
+                bytes.Add(Convert.ToByte(input.Substring(8 * i, 8), 2));
+            }
+            Address dottedDecimal = new Address(bytes[0], bytes[1], bytes[2], bytes[3]);
+
+            return dottedDecimal.ToString();
         }
 
         private static byte[] SplitAddress(string address)
