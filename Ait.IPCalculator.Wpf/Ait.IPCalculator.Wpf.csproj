@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ait.IPCalculator.Core\Ait.IPCalculator.Core.csproj" />
+  </ItemGroup>
+
 </Project>
