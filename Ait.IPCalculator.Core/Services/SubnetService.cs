@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ait.IPCalculator.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,35 @@ namespace Ait.IPCalculator.Core.Services
     {
         public SubnetService()
         {
+        }
+        public List<Address> GetAllSubnetMasks()
+        {
+            List<Address> addresses = new List<Address>();
+            List<byte> bytes = GetSubnetMaskBytes();
+            Address address;
+
+            foreach (byte byteValue in bytes)
+            {
+                address = new Address(byteValue, 0, 0, 0);
+                addresses.Add(address);
+            }
+            foreach (byte byteValue in bytes)
+            {
+                address = new Address(255, byteValue, 0, 0);
+                addresses.Add(address);
+            }
+            foreach (byte byteValue in bytes)
+            {
+                address = new Address(255, 255, byteValue, 0);
+                addresses.Add(address);
+            }
+            foreach (byte byteValue in bytes)
+            {
+                address = new Address(255, 255, 255, byteValue);
+                addresses.Add(address);
+            }
+
+            return addresses;
         }
 
         private List<byte> GetSubnetMaskBytes()
