@@ -66,7 +66,6 @@ namespace Ait.IPCalculator.Wpf
             else
                 return true;
         }
-
         private void Calculate()
         {
             txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
@@ -84,6 +83,7 @@ namespace Ait.IPCalculator.Wpf
             txtBroadcastAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex));
             txtBroadcastAddressDD.Text = addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex);
 
+            txtMaxNumberOfHosts.Text = addressService.GetMaxHosts(txtIP.Text, cmbSubnet.SelectedIndex);
             txtNetworkClass.Text = addressService.GetNetworkClass(txtIP.Text);
             txtNetworkType.Text = addressService.GetNetworkType(txtIP.Text);
         }
