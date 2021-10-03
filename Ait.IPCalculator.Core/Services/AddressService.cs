@@ -60,6 +60,11 @@ namespace Ait.IPCalculator.Core.Services
 
             return broadcastAddress;
         }
+        public string GetMaxHosts(string address, int cidr)
+        {
+            double maxHosts = Math.Pow(2, (32 - cidr)) - 2;
+            return maxHosts.ToString();
+        }
         public string GetNetworkClass(string input)
         {
             Address address = SetAddress(input);
