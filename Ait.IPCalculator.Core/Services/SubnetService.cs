@@ -39,6 +39,8 @@ namespace Ait.IPCalculator.Core.Services
                 addresses.Add(address);
             }
 
+            addresses.RemoveAt(addresses.Count - 1);
+
             return addresses;
         }
         public List<string> GetAllCIDR()
