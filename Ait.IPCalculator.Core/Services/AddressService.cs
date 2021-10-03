@@ -17,6 +17,21 @@ namespace Ait.IPCalculator.Core.Services
             subnetService = new SubnetService();
             converterService = new ConverterService();
         }
+        public string GetNetworkAddress(string address, int cidr)
+        {
+            Address networkAddress = SetAddress(address);
+            Address subnetMaskAddress = subnetService.GetAllSubnetMasks().ElementAt(cidr);
+
+            Address subnet = new Address(
+                (byte)(networkAddress.FirstOctet & subnetMaskAddress.FirstOctet),
+                (byte)(networkAddress.SecondOctet & subnetMaskAddress.SecondOctet),
+                (byte)(networkAddress.ThirdOctet & subnetMaskAddress.ThirdOctet),
+                (byte)(networkAddress.FourthOctet & subnetMaskAddress.FourthOctet)
+                );
+
+            return subnet.ToString();
+        }
+
         private Address SetAddress(string input)
         {
             string[] splitAddress = input.Split('.');
