@@ -92,14 +92,13 @@ namespace Ait.IPCalculator.Wpf
             foreach (string address in subnetService.GetAllCIDR())
             {
                 cmbSubnet.Items.Add(address);
-                cmbSubnet.SelectedIndex = 0;
             }
+            cmbSubnet.SelectedIndex = 0;
         }
         private void cmbSubnet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ClearControls();
         }
-
 
     }
 }
