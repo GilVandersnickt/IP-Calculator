@@ -47,7 +47,7 @@ namespace Ait.IPCalculator.Core.Services
 
             foreach (Address address in addresses)
             {
-                convertedAddresses.Add(address.ToString() + $"/{addresses.IndexOf(address)}");
+                convertedAddresses.Add(address.ToString() + $" (/{addresses.IndexOf(address)})");
             }
 
             return convertedAddresses;
