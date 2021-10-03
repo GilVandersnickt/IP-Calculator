@@ -78,9 +78,14 @@ namespace Ait.IPCalculator.Wpf
             txtFirstHostAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex));
             txtFirstHostAddressDD.Text = addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex);
 
+            txtLastHostAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetLastHost(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtLastHostAddressDD.Text = addressService.GetLastHost(txtIP.Text, cmbSubnet.SelectedIndex);
+
             txtBroadcastAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex));
             txtBroadcastAddressDD.Text = addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex);
 
+            txtNetworkClass.Text = addressService.GetNetworkClass(txtIP.Text);
+            txtNetworkType.Text = addressService.GetNetworkType(txtIP.Text);
         }
         private void FillComboBox()
         {
