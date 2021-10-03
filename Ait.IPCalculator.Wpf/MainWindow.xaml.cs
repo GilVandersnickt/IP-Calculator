@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ait.IPCalculator.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace Ait.IPCalculator.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        ConverterService converterService = new ConverterService();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace Ait.IPCalculator.Wpf
         {
             ClearControls();
             // your code here ...
- 
+            Calculate();
         }
         private void ClearControls()
         {
@@ -49,7 +52,10 @@ namespace Ait.IPCalculator.Wpf
             txtNetworkClass.Text = "";
             txtNetworkType.Text = "";
         }
-
+        private void Calculate()
+        {
+            txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
+        }
         private void cmbSubnet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ClearControls();
