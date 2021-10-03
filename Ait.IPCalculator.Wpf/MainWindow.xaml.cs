@@ -23,6 +23,7 @@ namespace Ait.IPCalculator.Wpf
     public partial class MainWindow : Window
     {
         ConverterService converterService = new ConverterService();
+        ValidatorService validatorService = new ValidatorService();
 
         public MainWindow()
         {
@@ -34,7 +35,10 @@ namespace Ait.IPCalculator.Wpf
         {
             ClearControls();
             // your code here ...
-            Calculate();
+            if (Validate())
+                MessageBox.Show("Gelieve geldig ip adres in te geven.");
+            else
+                Calculate();
         }
         private void ClearControls()
         {
@@ -52,6 +56,14 @@ namespace Ait.IPCalculator.Wpf
             txtNetworkClass.Text = "";
             txtNetworkType.Text = "";
         }
+        private bool Validate()
+        {
+            if (validatorService.ValidateIpAddress(txtIP.Text))
+                return false;
+            else
+                return true;
+        }
+
         private void Calculate()
         {
             txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
