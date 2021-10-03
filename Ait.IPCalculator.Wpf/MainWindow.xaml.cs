@@ -23,12 +23,14 @@ namespace Ait.IPCalculator.Wpf
     public partial class MainWindow : Window
     {
         ConverterService converterService = new ConverterService();
+        SubnetService subnetService = new SubnetService();
         ValidatorService validatorService = new ValidatorService();
 
         public MainWindow()
         {
             InitializeComponent();
             // your code here...
+            FillComboBox();
         }
 
         private void btnConvert_Click(object sender, RoutedEventArgs e)
@@ -67,6 +69,15 @@ namespace Ait.IPCalculator.Wpf
         private void Calculate()
         {
             txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
+
+        }
+        private void FillComboBox()
+        {
+            foreach (string address in subnetService.GetAllCIDR())
+            {
+                cmbSubnet.Items.Add(address);
+                cmbSubnet.SelectedIndex = 0;
+            }
         }
         private void cmbSubnet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
