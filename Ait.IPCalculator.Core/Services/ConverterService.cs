@@ -38,5 +38,18 @@ namespace Ait.IPCalculator.Core.Services
                 input[length - i - 1] = bit;
             }
         }
+        private string ConvertBitArrayToString(BitArray input)
+        {
+            string convertedBitArray = "";
+            foreach (bool inputValue in input)
+            {
+                if (inputValue)
+                    convertedBitArray += "1";
+                else
+                    convertedBitArray += "0";
+            }
+            return convertedBitArray;
+        }
+
     }
 }
