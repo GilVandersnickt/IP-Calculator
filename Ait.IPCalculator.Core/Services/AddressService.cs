@@ -24,10 +24,10 @@ namespace Ait.IPCalculator.Core.Services
             Address subnetMaskAddress = subnetService.GetAllSubnetMasks().ElementAt(cidr);
 
             Address subnet = new Address(
-                (byte)(networkAddress.FirstOctet & subnetMaskAddress.FirstOctet),
-                (byte)(networkAddress.SecondOctet & subnetMaskAddress.SecondOctet),
-                (byte)(networkAddress.ThirdOctet & subnetMaskAddress.ThirdOctet),
-                (byte)(networkAddress.FourthOctet & subnetMaskAddress.FourthOctet)
+                (byte)(networkAddress.FirstByte & subnetMaskAddress.FirstByte),
+                (byte)(networkAddress.SecondByte & subnetMaskAddress.SecondByte),
+                (byte)(networkAddress.ThirdByte & subnetMaskAddress.ThirdByte),
+                (byte)(networkAddress.FourthByte & subnetMaskAddress.FourthByte)
                 );
 
             return subnet.ToString();
@@ -35,14 +35,14 @@ namespace Ait.IPCalculator.Core.Services
         public string GetFirstHost(string address, int cidr)
         {
             Address firstHost = SetAddress(GetNetworkAddress(address, cidr));
-            firstHost.FourthOctet++;
+            firstHost.FourthByte++;
 
             return firstHost.ToString();
         }
         public string GetLastHost(string address, int cidr)
         {
             Address broadcastAddress = SetAddress(GetBroadcast(address, cidr));
-            broadcastAddress.FourthOctet--;
+            broadcastAddress.FourthByte--;
 
             return broadcastAddress.ToString();
         }
@@ -70,16 +70,16 @@ namespace Ait.IPCalculator.Core.Services
             Address address = SetAddress(input);
 
             // A class : first byte 0-127
-            if (address.FirstOctet <= 127)
+            if (address.FirstByte <= 127)
                 return NetworkClass.A.ToString();
             // B class : first byte 128-191
-            else if (128 <= address.FirstOctet && address.FirstOctet <= 191)
+            else if (128 <= address.FirstByte && address.FirstByte <= 191)
                 return NetworkClass.B.ToString();
             // C class : first byte 192-223
-            else if (192 <= address.FirstOctet && address.FirstOctet <= 223)
+            else if (192 <= address.FirstByte && address.FirstByte <= 223)
                 return NetworkClass.C.ToString();
             // D class : first byte 224-239
-            else if (224 <= address.FirstOctet && address.FirstOctet <= 239)
+            else if (224 <= address.FirstByte && address.FirstByte <= 239)
                 return NetworkClass.D.ToString();
             // E class : first byte 240-255
             else
@@ -89,22 +89,22 @@ namespace Ait.IPCalculator.Core.Services
         {
             Address address = SetAddress(input);
             // Private addresses : 10.X.X.X, 172.16.X.X – 172.31.X.X, 192.168.X.X
-            if (address.FirstOctet == 10 || (address.FirstOctet == 172 && (16 <= address.SecondOctet && address.SecondOctet <= 31) || (address.FirstOctet == 192 && address.SecondOctet == 168)))
+            if (address.FirstByte == 10 || (address.FirstByte == 172 && (16 <= address.SecondByte && address.SecondByte <= 31) || (address.FirstByte == 192 && address.SecondByte == 168)))
                 return NetworkType.Private.ToString();
             // Shared address space : 100.64.0.1 - 100.127.255.254
-            else if (address.FirstOctet == 100 && (64 <= address.SecondOctet && address.SecondOctet <= 127) && (1 <= address.FourthOctet && address.FourthOctet <= 254))
+            else if (address.FirstByte == 100 && (64 <= address.SecondByte && address.SecondByte <= 127) && (1 <= address.FourthByte && address.FourthByte <= 254))
                 return NetworkType.Shared.ToString();
             // Loopback addresses : 127.X.X.X
-            else if (address.FirstOctet == 127)
+            else if (address.FirstByte == 127)
                 return NetworkType.Loopback.ToString();
             // Link-local addresses : 169.254.X.X
-            else if (address.FirstOctet == 169 && address.SecondOctet == 254)
+            else if (address.FirstByte == 169 && address.SecondByte == 254)
                 return NetworkType.LinkLocal.ToString();
             // Experimental addresses : 240.X.X.X – 255.X.X.X
-            else if (240 <= address.FirstOctet && address.FirstOctet <= 255)
+            else if (240 <= address.FirstByte && address.FirstByte <= 255)
                 return NetworkType.Experimental.ToString();
             // Test-net addresses : 192.0.2.0 - 192.0.2.255
-            else if (address.FirstOctet == 192 && address.SecondOctet == 0 && address.ThirdOctet == 2)
+            else if (address.FirstByte == 192 && address.SecondByte == 0 && address.ThirdByte == 2)
                 return NetworkType.TestNet.ToString();
             // Public addresses 
             else

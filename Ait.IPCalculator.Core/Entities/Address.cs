@@ -10,18 +10,18 @@ namespace Ait.IPCalculator.Core.Entities
     {
         public Address(byte first, byte second, byte third, byte fourth)
         {
-            FirstOctet = first;
-            SecondOctet = second;
-            ThirdOctet = third;
-            FourthOctet = fourth;
+            FirstByte = first;
+            SecondByte = second;
+            ThirdByte = third;
+            FourthByte = fourth;
         }
-        public byte FirstOctet { get; set; }
-        public byte SecondOctet { get; set; }
-        public byte ThirdOctet { get; set; }
-        public byte FourthOctet { get; set; }
+        public byte FirstByte { get; set; }
+        public byte SecondByte { get; set; }
+        public byte ThirdByte { get; set; }
+        public byte FourthByte { get; set; }
         public override string ToString()
         {
-            return $"{FirstOctet}.{SecondOctet}.{ThirdOctet}.{FourthOctet}";
+            return $"{FirstByte}.{SecondByte}.{ThirdByte}.{FourthByte}";
         }
     }
 }
