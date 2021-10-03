@@ -41,6 +41,18 @@ namespace Ait.IPCalculator.Core.Services
 
             return addresses;
         }
+        public List<string> GetAllCIDR()
+        {
+            List<Address> addresses = GetAllSubnetMasks();
+            List<string> convertedAddresses = new List<string>();
+
+            foreach (Address address in addresses)
+            {
+                convertedAddresses.Add(address.ToString() + $"/{addresses.IndexOf(address)}");
+            }
+
+            return convertedAddresses;
+        }
 
         private List<byte> GetSubnetMaskBytes()
         {
