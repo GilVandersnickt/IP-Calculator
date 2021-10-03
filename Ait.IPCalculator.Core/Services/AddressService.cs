@@ -38,6 +38,13 @@ namespace Ait.IPCalculator.Core.Services
 
             return firstHost.ToString();
         }
+        public string GetLastHost(string address, int cidr)
+        {
+            Address broadcastAddress = SetAddress(GetBroadcast(address, cidr));
+            broadcastAddress.FourthOctet--;
+
+            return broadcastAddress.ToString();
+        }
         public string GetBroadcast(string address, int cidr)
         {
             Address networkAddress = SetAddress(GetNetworkAddress(address, cidr));
