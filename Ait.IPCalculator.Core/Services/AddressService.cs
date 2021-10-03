@@ -31,6 +31,14 @@ namespace Ait.IPCalculator.Core.Services
 
             return subnet.ToString();
         }
+        public string GetFirstHost(string address, int cidr)
+        {
+            Address firstHost = SetAddress(GetNetworkAddress(address, cidr));
+            firstHost.FourthOctet++;
+
+            return firstHost.ToString();
+        }
+
 
         private Address SetAddress(string input)
         {
