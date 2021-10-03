@@ -56,7 +56,7 @@ namespace Ait.IPCalculator.Core.Services
             return convertedAddresses;
         }
 
-        private List<byte> GetSubnetMaskBytes()
+        private static List<byte> GetSubnetMaskBytes()
         {
             List<byte> bytes = new List<byte>();
             string binary = "";

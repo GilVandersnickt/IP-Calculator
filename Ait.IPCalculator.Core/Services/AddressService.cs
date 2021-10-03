@@ -111,7 +111,7 @@ namespace Ait.IPCalculator.Core.Services
                 return NetworkType.Public.ToString();
         }
 
-        private Address SetAddress(string input)
+        private static Address SetAddress(string input)
         {
             string[] splitAddress = input.Split('.');
             byte[] convertedArray = splitAddress.Select(x => byte.Parse(x)).ToArray();

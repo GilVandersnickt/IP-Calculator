@@ -60,7 +60,7 @@ namespace Ait.IPCalculator.Core.Services
                 input[length - i - 1] = bit;
             }
         }
-        private string ConvertBitArrayToString(BitArray input)
+        private static string ConvertBitArrayToString(BitArray input)
         {
             string convertedBitArray = "";
             foreach (bool inputValue in input)
