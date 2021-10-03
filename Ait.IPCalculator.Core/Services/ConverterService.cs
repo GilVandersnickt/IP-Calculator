@@ -8,6 +8,12 @@ namespace Ait.IPCalculator.Core.Services
 {
     public class ConverterService
     {
+        private static byte[] SplitAddress(string address)
+        {
+            string[] splitAddress = address.Split('.');
+            byte[] convertedArray = splitAddress.Select(x => byte.Parse(x)).ToArray();
+            return convertedArray;
+        }
 
     }
 }
