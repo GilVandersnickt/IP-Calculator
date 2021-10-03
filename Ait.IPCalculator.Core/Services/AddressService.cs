@@ -1,4 +1,5 @@
 ﻿using Ait.IPCalculator.Core.Entities;
+using Ait.IPCalculator.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,26 @@ namespace Ait.IPCalculator.Core.Services
 
             return broadcastAddress;
         }
+        public string GetNetworkClass(string input)
+        {
+            Address address = SetAddress(input);
 
+            // A class : first byte 0-127
+            if (address.FirstOctet <= 127)
+                return NetworkClass.A.ToString();
+            // B class : first byte 128-191
+            else if (128 <= address.FirstOctet && address.FirstOctet <= 191)
+                return NetworkClass.B.ToString();
+            // C class : first byte 192-223
+            else if (192 <= address.FirstOctet && address.FirstOctet <= 223)
+                return NetworkClass.C.ToString();
+            // D class : first byte 224-239
+            else if (224 <= address.FirstOctet && address.FirstOctet <= 239)
+                return NetworkClass.D.ToString();
+            // E class : first byte 240-255
+            else
+                return NetworkClass.E.ToString();
+        }
 
         private Address SetAddress(string input)
         {
