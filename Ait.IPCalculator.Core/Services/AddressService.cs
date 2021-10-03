@@ -38,6 +38,20 @@ namespace Ait.IPCalculator.Core.Services
 
             return firstHost.ToString();
         }
+        public string GetBroadcast(string address, int cidr)
+        {
+            Address networkAddress = SetAddress(GetNetworkAddress(address, cidr));
+            string binary = converterService.ConvertDottedDecimalToBinary(networkAddress.ToString());
+            string splitBinary = binary.Substring(0, cidr);
+            string broadcastAddress = splitBinary;
+
+            for (int i = 0; i < (32 - splitBinary.Length); i++)
+                broadcastAddress += "1";
+
+            broadcastAddress = converterService.ConvertBinaryToDottedDecimal(broadcastAddress);
+
+            return broadcastAddress;
+        }
 
 
         private Address SetAddress(string input)
