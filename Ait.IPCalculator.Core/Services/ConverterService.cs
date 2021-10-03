@@ -10,6 +10,9 @@ namespace Ait.IPCalculator.Core.Services
 {
     public class ConverterService
     {
+        public ConverterService()
+        {
+        }
         public string ConvertDottedDecimalToBinary(string input)
         {
             byte[] byteValues = SplitAddress(input);
