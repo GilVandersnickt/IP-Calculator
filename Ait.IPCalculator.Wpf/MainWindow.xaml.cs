@@ -22,6 +22,7 @@ namespace Ait.IPCalculator.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        AddressService addressService = new AddressService();
         ConverterService converterService = new ConverterService();
         SubnetService subnetService = new SubnetService();
         ValidatorService validatorService = new ValidatorService();
@@ -69,6 +70,16 @@ namespace Ait.IPCalculator.Wpf
         private void Calculate()
         {
             txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
+            txtSubnetBit.Text = converterService.ConvertDottedDecimalToBinary(subnetService.GetAllSubnetMasks().ElementAt(cmbSubnet.SelectedIndex).ToString());
+
+            txtNetworkAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtNetworkAddressDD.Text = addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex);
+
+            txtFirstHostAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtFirstHostAddressDD.Text = addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex);
+
+            txtBroadcastAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtBroadcastAddressDD.Text = addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex);
 
         }
         private void FillComboBox()
