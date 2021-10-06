@@ -1,8 +1,8 @@
 ﻿namespace Ait.IPCalculator.Core.Entities
 {
-    public class Address
+    public class DottedDecimal
     {
-        public Address(byte first, byte second, byte third, byte fourth)
+        public DottedDecimal(byte first, byte second, byte third, byte fourth)
         {
             FirstByte = first;
             SecondByte = second;

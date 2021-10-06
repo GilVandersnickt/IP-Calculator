@@ -9,30 +9,30 @@ namespace Ait.IPCalculator.Core.Services
         public SubnetService()
         {
         }
-        public List<Address> GetAllSubnetMasks()
+        public List<DottedDecimal> GetAllSubnetMasks()
         {
-            List<Address> addresses = new List<Address>();
+            List<DottedDecimal> addresses = new List<DottedDecimal>();
             List<byte> bytes = GetSubnetMaskBytes();
-            Address address;
+            DottedDecimal address;
 
             foreach (byte byteValue in bytes)
             {
-                address = new Address(byteValue, 0, 0, 0);
+                address = new DottedDecimal(byteValue, 0, 0, 0);
                 addresses.Add(address);
             }
             foreach (byte byteValue in bytes)
             {
-                address = new Address(255, byteValue, 0, 0);
+                address = new DottedDecimal(255, byteValue, 0, 0);
                 addresses.Add(address);
             }
             foreach (byte byteValue in bytes)
             {
-                address = new Address(255, 255, byteValue, 0);
+                address = new DottedDecimal(255, 255, byteValue, 0);
                 addresses.Add(address);
             }
             foreach (byte byteValue in bytes)
             {
-                address = new Address(255, 255, 255, byteValue);
+                address = new DottedDecimal(255, 255, 255, byteValue);
                 addresses.Add(address);
             }
 
@@ -42,10 +42,10 @@ namespace Ait.IPCalculator.Core.Services
         }
         public List<string> GetAllCIDR()
         {
-            List<Address> addresses = GetAllSubnetMasks();
+            List<DottedDecimal> addresses = GetAllSubnetMasks();
             List<string> convertedAddresses = new List<string>();
 
-            foreach (Address address in addresses)
+            foreach (DottedDecimal address in addresses)
             {
                 convertedAddresses.Add(address.ToString() + $" (/{addresses.IndexOf(address)})");
             }

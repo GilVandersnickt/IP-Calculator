@@ -28,7 +28,7 @@ namespace Ait.IPCalculator.Core.Services
             {
                 bytes.Add(Convert.ToByte(input.Substring(8 * i, 8), 2));
             }
-            Address dottedDecimal = new Address(bytes[0], bytes[1], bytes[2], bytes[3]);
+            DottedDecimal dottedDecimal = new DottedDecimal(bytes[0], bytes[1], bytes[2], bytes[3]);
 
             return dottedDecimal.ToString();
         }

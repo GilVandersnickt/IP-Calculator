@@ -17,10 +17,10 @@ namespace Ait.IPCalculator.Core.Services
         }
         public string GetNetworkAddress(string address, int cidr)
         {
-            Address networkAddress = SetAddress(address);
-            Address subnetMaskAddress = subnetService.GetAllSubnetMasks().ElementAt(cidr);
+            DottedDecimal networkAddress = SetAddress(address);
+            DottedDecimal subnetMaskAddress = subnetService.GetAllSubnetMasks().ElementAt(cidr);
 
-            Address subnet = new Address(
+            DottedDecimal subnet = new DottedDecimal(
                 (byte)(networkAddress.FirstByte & subnetMaskAddress.FirstByte),
                 (byte)(networkAddress.SecondByte & subnetMaskAddress.SecondByte),
                 (byte)(networkAddress.ThirdByte & subnetMaskAddress.ThirdByte),
@@ -31,21 +31,21 @@ namespace Ait.IPCalculator.Core.Services
         }
         public string GetFirstHost(string address, int cidr)
         {
-            Address firstHost = SetAddress(GetNetworkAddress(address, cidr));
+            DottedDecimal firstHost = SetAddress(GetNetworkAddress(address, cidr));
             firstHost.FourthByte++;
 
             return firstHost.ToString();
         }
         public string GetLastHost(string address, int cidr)
         {
-            Address broadcastAddress = SetAddress(GetBroadcast(address, cidr));
+            DottedDecimal broadcastAddress = SetAddress(GetBroadcast(address, cidr));
             broadcastAddress.FourthByte--;
 
             return broadcastAddress.ToString();
         }
         public string GetBroadcast(string address, int cidr)
         {
-            Address networkAddress = SetAddress(GetNetworkAddress(address, cidr));
+            DottedDecimal networkAddress = SetAddress(GetNetworkAddress(address, cidr));
             string binary = converterService.ConvertDottedDecimalToBinary(networkAddress.ToString());
             string splitBinary = binary.Substring(0, cidr);
             string broadcastAddress = splitBinary;
@@ -64,7 +64,7 @@ namespace Ait.IPCalculator.Core.Services
         }
         public string GetNetworkClass(string input)
         {
-            Address address = SetAddress(input);
+            DottedDecimal address = SetAddress(input);
 
             // A class : first byte 0-127
             if (address.FirstByte <= 127)
@@ -84,7 +84,7 @@ namespace Ait.IPCalculator.Core.Services
         }
         public string GetNetworkType(string input)
         {
-            Address address = SetAddress(input);
+            DottedDecimal address = SetAddress(input);
             // Private addresses : 10.X.X.X, 172.16.X.X – 172.31.X.X, 192.168.X.X
             if (address.FirstByte == 10 || (address.FirstByte == 172 && (16 <= address.SecondByte && address.SecondByte <= 31) || (address.FirstByte == 192 && address.SecondByte == 168)))
                 return NetworkType.Private.ToString();
@@ -108,12 +108,12 @@ namespace Ait.IPCalculator.Core.Services
                 return NetworkType.Public.ToString();
         }
 
-        private static Address SetAddress(string input)
+        private static DottedDecimal SetAddress(string input)
         {
             string[] splitAddress = input.Split('.');
             byte[] convertedArray = splitAddress.Select(x => byte.Parse(x)).ToArray();
 
-            return new Address(convertedArray[0], convertedArray[1], convertedArray[2], convertedArray[3]);
+            return new DottedDecimal(convertedArray[0], convertedArray[1], convertedArray[2], convertedArray[3]);
         }
 
     }
