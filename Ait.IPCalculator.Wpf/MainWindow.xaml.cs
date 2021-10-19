@@ -11,6 +11,8 @@ namespace Ait.IPCalculator.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string ValidationErrorMessage = "Gelieve geldig ip adres in te geven.";
+
         AddressService addressService = new AddressService();
         ConverterService converterService = new ConverterService();
         SubnetService subnetService = new SubnetService();
@@ -30,7 +32,7 @@ namespace Ait.IPCalculator.Wpf
             if (Validate())
                 Calculate();
             else
-                MessageBox.Show("Gelieve geldig ip adres in te geven.");
+                MessageBox.Show(ValidationErrorMessage);
         }
         private void ClearControls()
         {
