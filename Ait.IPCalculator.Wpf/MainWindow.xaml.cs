@@ -57,19 +57,19 @@ namespace Ait.IPCalculator.Wpf
         }
         private void Calculate()
         {
-            txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
-            txtSubnetBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetSubnet(cmbSubnet.SelectedIndex));
+            txtIPBit.Text = converterService.ConvertToBinary(txtIP.Text);
+            txtSubnetBit.Text = converterService.ConvertToBinary(addressService.GetSubnet(cmbSubnet.SelectedIndex));
 
-            txtNetworkAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtNetworkAddressBit.Text = converterService.ConvertToBinary(addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex));
             txtNetworkAddressDD.Text = addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex);
 
-            txtFirstHostAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtFirstHostAddressBit.Text = converterService.ConvertToBinary(addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex));
             txtFirstHostAddressDD.Text = addressService.GetFirstHost(txtIP.Text, cmbSubnet.SelectedIndex);
 
-            txtLastHostAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetLastHost(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtLastHostAddressBit.Text = converterService.ConvertToBinary(addressService.GetLastHost(txtIP.Text, cmbSubnet.SelectedIndex));
             txtLastHostAddressDD.Text = addressService.GetLastHost(txtIP.Text, cmbSubnet.SelectedIndex);
 
-            txtBroadcastAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex));
+            txtBroadcastAddressBit.Text = converterService.ConvertToBinary(addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex));
             txtBroadcastAddressDD.Text = addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex);
 
             txtMaxNumberOfHosts.Text = addressService.GetMaxHosts(txtIP.Text, cmbSubnet.SelectedIndex);

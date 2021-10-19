@@ -12,7 +12,7 @@ namespace Ait.IPCalculator.Core.Services
         {
 
         }
-        public string ConvertDottedDecimalToBinary(string input)
+        public string ConvertToBinary(string input)
         {
             byte[] byteValues = SplitAddress(input);
             string binary = "";

@@ -50,7 +50,7 @@ namespace Ait.IPCalculator.Core.Services
         public string GetBroadcast(string address, int cidr)
         {
             DottedDecimal networkAddress = SetAddress(GetNetworkAddress(address, cidr));
-            string binary = converterService.ConvertDottedDecimalToBinary(networkAddress.ToString());
+            string binary = converterService.ConvertToBinary(networkAddress.ToString());
             string splitBinary = binary.Substring(0, cidr);
             string broadcastAddress = splitBinary;
 
