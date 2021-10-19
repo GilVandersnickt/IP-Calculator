@@ -10,6 +10,7 @@ namespace Ait.IPCalculator.Core.Services
     {
         public ConverterService()
         {
+
         }
         public string ConvertDottedDecimalToBinary(string input)
         {
@@ -21,7 +22,7 @@ namespace Ait.IPCalculator.Core.Services
             }
             return binary;
         }
-        public string ConvertBinaryToDottedDecimal(string input)
+        public DottedDecimal ConvertBinaryToDottedDecimal(string input)
         {
             List<byte> bytes = new List<byte>();
             for (int i = 0; i < (input.Length / 8); ++i)
@@ -30,7 +31,7 @@ namespace Ait.IPCalculator.Core.Services
             }
             DottedDecimal dottedDecimal = new DottedDecimal(bytes[0], bytes[1], bytes[2], bytes[3]);
 
-            return dottedDecimal.ToString();
+            return dottedDecimal;
         }
 
         private static byte[] SplitAddress(string address)
@@ -63,15 +64,12 @@ namespace Ait.IPCalculator.Core.Services
         }
         private static string ConvertBitArrayToString(BitArray input)
         {
-            string convertedBitArray = "";
+            string convertedInput = "";
             foreach (bool inputValue in input)
             {
-                if (inputValue)
-                    convertedBitArray += "1";
-                else
-                    convertedBitArray += "0";
+                convertedInput += inputValue ? "1" : "0";
             }
-            return convertedBitArray;
+            return convertedInput;
         }
 
     }

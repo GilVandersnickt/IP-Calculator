@@ -42,10 +42,10 @@ namespace Ait.IPCalculator.Core.Services
         }
         public string GetLastHost(string address, int cidr)
         {
-            DottedDecimal broadcastAddress = SetAddress(GetBroadcast(address, cidr));
-            broadcastAddress.FourthByte--;
+            DottedDecimal lastHost = SetAddress(GetBroadcast(address, cidr));
+            lastHost.FourthByte--;
 
-            return broadcastAddress.ToString();
+            return lastHost.ToString();
         }
         public string GetBroadcast(string address, int cidr)
         {
@@ -57,7 +57,7 @@ namespace Ait.IPCalculator.Core.Services
             for (int i = 0; i < (32 - splitBinary.Length); i++)
                 broadcastAddress += "1";
 
-            broadcastAddress = converterService.ConvertBinaryToDottedDecimal(broadcastAddress);
+            broadcastAddress = converterService.ConvertBinaryToDottedDecimal(broadcastAddress).ToString();
 
             return broadcastAddress;
         }
@@ -115,7 +115,7 @@ namespace Ait.IPCalculator.Core.Services
         private static DottedDecimal SetAddress(string input)
         {
             string[] splitAddress = input.Split('.');
-            byte[] convertedArray = splitAddress.Select(x => byte.Parse(x)).ToArray();
+            byte[] convertedArray = splitAddress.Select(text => byte.Parse(text)).ToArray();
 
             return new DottedDecimal(convertedArray[0], convertedArray[1], convertedArray[2], convertedArray[3]);
         }
