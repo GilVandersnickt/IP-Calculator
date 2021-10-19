@@ -28,9 +28,9 @@ namespace Ait.IPCalculator.Wpf
             ClearControls();
             // your code here ...
             if (Validate())
-                MessageBox.Show("Gelieve geldig ip adres in te geven.");
-            else
                 Calculate();
+            else
+                MessageBox.Show("Gelieve geldig ip adres in te geven.");
         }
         private void ClearControls()
         {
@@ -51,9 +51,9 @@ namespace Ait.IPCalculator.Wpf
         private bool Validate()
         {
             if (validatorService.ValidateIpAddress(txtIP.Text))
-                return false;
-            else
                 return true;
+            else
+                return false;
         }
         private void Calculate()
         {
