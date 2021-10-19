@@ -29,6 +29,10 @@ namespace Ait.IPCalculator.Core.Services
 
             return subnet.ToString();
         }
+        public string GetSubnet(int cidr)
+        {
+            return subnetService.GetAllSubnetMasks().ElementAt(cidr).ToString();
+        }
         public string GetFirstHost(string address, int cidr)
         {
             DottedDecimal firstHost = SetAddress(GetNetworkAddress(address, cidr));

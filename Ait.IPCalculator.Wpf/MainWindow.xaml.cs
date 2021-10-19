@@ -58,7 +58,7 @@ namespace Ait.IPCalculator.Wpf
         private void Calculate()
         {
             txtIPBit.Text = converterService.ConvertDottedDecimalToBinary(txtIP.Text);
-            txtSubnetBit.Text = converterService.ConvertDottedDecimalToBinary(subnetService.GetAllSubnetMasks().ElementAt(cmbSubnet.SelectedIndex).ToString());
+            txtSubnetBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetSubnet(cmbSubnet.SelectedIndex));
 
             txtNetworkAddressBit.Text = converterService.ConvertDottedDecimalToBinary(addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex));
             txtNetworkAddressDD.Text = addressService.GetNetworkAddress(txtIP.Text, cmbSubnet.SelectedIndex);
