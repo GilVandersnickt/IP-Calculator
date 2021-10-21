@@ -52,10 +52,7 @@ namespace Ait.IPCalculator.Wpf
         }
         private bool Validate()
         {
-            if (validatorService.ValidateIpAddress(txtIP.Text))
-                return true;
-            else
-                return false;
+            return validatorService.ValidateIpAddress(txtIP.Text);
         }
         private void Calculate()
         {
