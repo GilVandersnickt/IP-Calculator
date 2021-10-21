@@ -17,17 +17,17 @@ namespace Ait.IPCalculator.Core.Services
         }
         public string GetNetworkAddress(string address, int cidr)
         {
-            DottedDecimal networkAddress = SetAddress(address);
+            DottedDecimal convertedAddress = SetAddress(address);
             DottedDecimal subnetMaskAddress = subnetService.GetAllSubnetMasks().ElementAt(cidr);
 
-            DottedDecimal subnet = new DottedDecimal(
-                (byte)(networkAddress.FirstByte & subnetMaskAddress.FirstByte),
-                (byte)(networkAddress.SecondByte & subnetMaskAddress.SecondByte),
-                (byte)(networkAddress.ThirdByte & subnetMaskAddress.ThirdByte),
-                (byte)(networkAddress.FourthByte & subnetMaskAddress.FourthByte)
+            DottedDecimal networkAddress = new DottedDecimal(
+                (byte)(convertedAddress.FirstByte & subnetMaskAddress.FirstByte),
+                (byte)(convertedAddress.SecondByte & subnetMaskAddress.SecondByte),
+                (byte)(convertedAddress.ThirdByte & subnetMaskAddress.ThirdByte),
+                (byte)(convertedAddress.FourthByte & subnetMaskAddress.FourthByte)
                 );
 
-            return subnet.ToString();
+            return networkAddress.ToString();
         }
         public string GetSubnet(int cidr)
         {
