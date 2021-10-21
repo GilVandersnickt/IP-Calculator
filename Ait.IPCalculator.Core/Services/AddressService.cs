@@ -61,7 +61,7 @@ namespace Ait.IPCalculator.Core.Services
 
             return broadcastAddress;
         }
-        public string GetMaxHosts(string address, int cidr)
+        public string GetMaxHosts(int cidr)
         {
             double maxHosts = Math.Pow(2, (32 - cidr)) - 2;
             return maxHosts.ToString();

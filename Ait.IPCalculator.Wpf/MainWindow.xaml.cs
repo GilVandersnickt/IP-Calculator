@@ -74,7 +74,7 @@ namespace Ait.IPCalculator.Wpf
             txtBroadcastAddressBit.Text = converterService.ConvertToBinary(addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex));
             txtBroadcastAddressDD.Text = addressService.GetBroadcast(txtIP.Text, cmbSubnet.SelectedIndex);
 
-            txtMaxNumberOfHosts.Text = addressService.GetMaxHosts(txtIP.Text, cmbSubnet.SelectedIndex);
+            txtMaxNumberOfHosts.Text = addressService.GetMaxHosts(cmbSubnet.SelectedIndex);
             txtNetworkClass.Text = addressService.GetNetworkClass(txtIP.Text);
             txtNetworkType.Text = addressService.GetNetworkType(txtIP.Text);
         }
